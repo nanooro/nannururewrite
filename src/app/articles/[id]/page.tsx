@@ -4,7 +4,11 @@ import Header from "@components/header";
 import { Footer } from "@components/footer";
 import Link from "next/link";
 
-export default async function ArticlePage({ params }) {
+export default async function ArticlePage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = params;
 
   const { data, error } = await supabase

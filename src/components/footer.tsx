@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'next/link'
+import Link from "next/link";
 export function Footer({}) {
   return (
     <div
@@ -12,7 +12,7 @@ export function Footer({}) {
           Janapriya media
         </span>
       </h1>
-      <Link href="">
+      <Link href="https://www.youtube.com/channel/UCiIjpbV1aonM5F61JeiJ9gQ">
         <h1 className="m-4 text-3xl inline-block relative">
           visit our channel!
           <span className="absolute left-0 bottom-0 w-full h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></span>
