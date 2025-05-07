@@ -18,9 +18,7 @@
         "name": "next"
       }
     ],
-    // "paths": {
-    //   "@/*": ["./src/*"]
-    // }
+    "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"]
     }
