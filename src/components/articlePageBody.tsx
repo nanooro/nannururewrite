@@ -1,8 +1,11 @@
 import { Footer } from "@components/footer";
 import Header from "@components/header";
 import Image from "next/image";
+type Props = {
+  imgUrl: string;
+};
 
-export default function ArticlePage({ imgUrl }) {
+export default function ArticlePage({ imgUrl }: Props) {
   return (
     <>
       {" "}

@@ -1,7 +1,21 @@
 import React from "react";
 import Image from "next/image";
 
-export function ArticleCard({ imgUrl, Heading, subHeading, date, rating }) {
+type Props = {
+  imgUrl: string;
+  Heading: string;
+  subHeading: string;
+  date: string;
+  rating: number;
+};
+
+export function ArticleCard({
+  imgUrl,
+  Heading,
+  subHeading,
+  date,
+  rating,
+}: Props) {
   return (
     <div
       className="gap-5 justify-center items-center w-[100%] h-auto flex flex-wrap"

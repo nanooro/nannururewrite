@@ -7,7 +7,7 @@ import { Footer } from "@components/footer";
 import Link from "next/link";
 
 export default function ArticlesPage() {
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchArticles = async () => {
