@@ -1,10 +1,14 @@
-// app/articles/[id]/page.jsx
-import { supabase } from "../../../lib/supabaseClient";
+import { createClient } from "@supabase/supabase-js";
 import Header from "@components/header";
 import { Footer } from "@components/footer";
 import Link from "next/link";
 
 export default async function ArticlePage({ params }) {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+
   const { id } = params;
 
   const { data, error } = await supabase
