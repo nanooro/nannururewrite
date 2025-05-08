@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default async function ArticlePage({ params }) {
   const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    "https://dhnrkykrkxucnmymcekb.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRobnJreWtya3h1Y25teW1jZWtiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1NDQ2MTMsImV4cCI6MjA2MjEyMDYxM30.4p1CZh8NCSXBjLkWdGvEFMQjSERX9_-FJbBpLAXG9Os"
   );
 
   const { id } = params;
