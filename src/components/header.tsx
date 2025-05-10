@@ -15,7 +15,7 @@ export default function Header() {
       id="header"
     >
       <Link href="/">
-        <h1 className="text-4xl font-bold">Nannuru</h1>
+        <h1 className="text-4xl font-bold">Nannuru.com</h1>
       </Link>
       <div className="ml-auto" id="hamMenuIcon">
         <AnimatePresence mode="wait">
