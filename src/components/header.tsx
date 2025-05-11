@@ -8,9 +8,9 @@ export default function Header() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // transition={{ duration: 0.3 }}
       className="w-full bg-white flex justify-start items-center p-2"
       id="header"
     >
@@ -34,10 +34,10 @@ export default function Header() {
 function HamBurIco({ setIsHamMenuOpen }) {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
+      // transition={{ duration: 0.2 }}
       onClick={() => setIsHamMenuOpen(true)}
     >
       <svg
