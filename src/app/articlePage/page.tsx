@@ -10,7 +10,7 @@ export default function Body() {
       <Header />
       <div className="w-[100%] h-[100%] p-5  outline" id="articleBody">
         <Image
-          src={imgUrl}
+          src="/2048px-Facebook-f-logo-2021-svg-removebg-preview.png"
           alt="The grand resort"
           fill
           className="object-cover rounded-xl"
