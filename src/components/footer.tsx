@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Footer({}) {
   return (
     <div
-      className="-mb-2 w-full bg-slate-300 min-h-[200px] mt-[500px] h-auto  flex flex-col justify-start items-center "
+      className="-mb-2 w-full bg-slate-300 min-h-[150px] mt-[200px] h-auto  flex flex-col justify-center items-center "
       id="footer"
     >
       <h1 className="text-3xl ">

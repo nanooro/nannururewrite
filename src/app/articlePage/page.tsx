@@ -9,15 +9,31 @@ export default function Body() {
       {" "}
       <Header />
       <div className="w-[100%] h-[100%] p-5  outline" id="articleBody">
-        {/* <Image
+        <Image
           src={imgUrl}
           alt="The grand resort"
           fill
           className="object-cover rounded-xl"
-        />{" "} */}
+        />{" "}
       </div>
       <Footer></Footer>
     </>
   );
   // return <ArticlePageBody />;
 }
+
+// return (
+//   <>
+//     {" "}
+//     <Header />
+//     <div className="w-[100%] h-[100%] p-5  outline" id="articleBody">
+//       {/* <Image
+//         src={imgUrl}
+//         alt="The grand resort"
+//         fill
+//         className="object-cover rounded-xl"
+//       />{" "} */}
+//     </div>
+//     <Footer></Footer>
+//   </>
+// );

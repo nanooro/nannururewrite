@@ -1,33 +1,86 @@
+"use client";
+import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import Header from "@components/header";
+import { ArticleCard } from "@components/articleCard";
 import { Footer } from "@components/footer";
+import { useParams } from "next/navigation";
 import Link from "next/link";
+import Header from "@components/header";
+import SocialCard from "@components/socialCard";
 
-export default async function ArticlePage({ params }) {
-  const supabase = createClient(
-    "https://dhnrkykrkxucnmymcekb.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRobnJreWtya3h1Y25teW1jZWtiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1NDQ2MTMsImV4cCI6MjA2MjEyMDYxM30.4p1CZh8NCSXBjLkWdGvEFMQjSERX9_-FJbBpLAXG9Os"
-  );
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
-  const { id } = params;
+export default function ArticlePage() {
+  const [article, setArticle] = useState(null);
+  const [articles, setArticles] = useState([]);
+  const params = useParams();
+  const id = params.id;
 
-  const { data, error } = await supabase
-    .from("Nannuru_articles_table")
-    .select("*")
-    .eq("id", id)
-    .single();
+  useEffect(() => {
+    const fetchArticle = async () => {
+      const { data, error } = await supabase
+        .from("Nannuru_articles_table")
+        .select("*")
+        .eq("id", id)
+        .single();
 
-  if (error) return <div>Error loading article</div>;
+      if (error) console.error(error);
+      else setArticle(data);
+    };
+
+    const fetchAll = async () => {
+      const { data, error } = await supabase
+        .from("Nannuru_articles_table")
+        .select("*");
+
+      if (error) console.error(error);
+      else setArticles(data);
+    };
+
+    fetchArticle();
+    fetchAll();
+  }, [id]);
+
+  if (!article) return <div>Loading...</div>;
 
   return (
     <>
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold">{data.Heading}</h1>
-        <p className="text-sm text-gray-500">{data.date}</p>
-        <img src={data.imgUrl} alt="" className="my-4 w-full rounded" />
-        <p>{data.subHeading}</p>
-        <p>{data.content}</p>
+        <h1 className="text-2xl font-bold">{article.Heading}</h1>
+        <p className="text-sm text-gray-500">{article.date}</p>
+        <img src={article.imgUrl} alt="" className="my-4 w-full rounded" />
+        <p>{article.subHeading}</p>
+        <p>{article.content}</p>
+
+        <div className="flex-wrap gap-2 mt-[100px] mb-[100px] scale-[1.2] flex justify-center items-center w-full h-auto">
+          <SocialCard
+            linkUrl={`https://www.facebook.com/sharer/sharer.php?u=https://nannuru.com/articles/${id}`}
+            imgUrl="/2048px-Facebook-f-logo-2021-svg-removebg-preview.png"
+            name="facebook"
+          />
+          <SocialCard
+            linkUrl={`https://api.whatsapp.com/send?text=https://nannuru.com/articles/${id}`}
+            imgUrl="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+            name="whatsapp"
+          />{" "}
+        </div>
+        <div className="flex flex-wrap gap-4 justify-center mt-[200px]">
+          {articles.map((a) => (
+            <Link href={`/articles/${a.id}`} key={a.id}>
+              <ArticleCard
+                imgUrl={a.imgUrl}
+                Heading={a.Heading}
+                subHeading={a.subHeading}
+                date={a.date}
+                rating={a.rating}
+              />
+            </Link>
+          ))}
+        </div>
       </div>
       <Footer />
     </>
