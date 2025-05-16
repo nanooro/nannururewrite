@@ -21,8 +21,7 @@ export default function ArticlePage() {
   const [article, setArticle] = useState(null);
   const [articles, setArticles] = useState([]);
   const params = useParams();
-  const id = params.id;
-
+  const id = params?.id?.toString();
   useEffect(() => {
     async function fetchArticle() {
       const { data, error } = await supabase
