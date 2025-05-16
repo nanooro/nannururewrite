@@ -1,39 +1,27 @@
-// import { ArticlePageBody } from "@components/articlePageBody";
-import { Footer } from "@components/footer";
-import Header from "@components/header";
-import Image from "next/image";
+import Head from "next/head";
 
-export default function Body() {
+const ArticlePage = ({ article, id }) => {
+  const articleUrl = `https://nannuru.com/articles/${id}`;
+
   return (
     <>
-      {" "}
-      <Header />
-      <div className="w-[100%] h-[100%] p-5  outline" id="articleBody">
-        <Image
-          src="/2048px-Facebook-f-logo-2021-svg-removebg-preview.png"
-          alt="The grand resort"
-          fill
-          className="object-cover rounded-xl"
-        />{" "}
-      </div>
-      <Footer></Footer>
+      <Head>
+        <meta property="og:title" content={article.Heading} />
+        <meta property="og:description" content={article.subHeading} />
+        <meta property="og:url" content={articleUrl} />
+        <meta property="og:image" content={article.imgUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Nannuru" />
+        {/* Other meta tags as needed */}
+      </Head>
+
+      {/* Article content
+      <h1>{article.Heading}</h1>
+      <img src={article.imgUrl} alt={article.Heading} />
+      <p>{article.subHeading}</p>
+      <p>{article.content}</p> */}
     </>
   );
-  // return <ArticlePageBody />;
-}
+};
 
-// return (
-//   <>
-//     {" "}
-//     <Header />
-//     <div className="w-[100%] h-[100%] p-5  outline" id="articleBody">
-//       {/* <Image
-//         src={imgUrl}
-//         alt="The grand resort"
-//         fill
-//         className="object-cover rounded-xl"
-//       />{" "} */}
-//     </div>
-//     <Footer></Footer>
-//   </>
-// );
+export default ArticlePage;
