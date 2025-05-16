@@ -22,7 +22,7 @@ export default function ArticlePage() {
   const id = params.id;
 
   useEffect(() => {
-    async function fetchArticle() {
+    const fetchArticle = async () => {
       const { data, error } = await supabase
         .from("Nannuru_articles_table")
         .select("*")
@@ -38,16 +38,16 @@ export default function ArticlePage() {
       } else {
         setArticle(data);
       }
-    }
+    };
 
-    async function fetchAll() {
+    const fetchAll = async () => {
       const { data, error } = await supabase
         .from("Nannuru_articles_table")
         .select("*");
 
       if (error) console.error(error);
       else setArticles(data);
-    }
+    };
 
     fetchArticle();
     fetchAll();
@@ -80,7 +80,11 @@ export default function ArticlePage() {
       <div className="p-4 max-w-3xl mx-auto">
         <div className="flex">
           <h1 className="text-2xl font-bold">{article.Heading}</h1>
-          <Share className="ml-auto inline w-tuo h-auto flex" id={id} imageUrl={article.imgUrl} />
+          <Share
+            className="ml-auto inline w-tuo h-auto flex"
+            id={id}
+            imageUrl={article.imgUrl}
+          />
         </div>
         <p className="text-sm text-gray-500">{article.date}</p>
         <img src={article.imgUrl} alt="" className="my-4 w-full rounded" />
@@ -89,7 +93,7 @@ export default function ArticlePage() {
         <div className="flex justify-center items-center">
           <p className="mt-12">End</p>
         </div>
-        <hr className="my-4 border-t border-gray-300" />
+        <hr className="my-4 border-t border-gray-300 " />
         <div className="flex-wrap gap-2 mt-[80px] mb-[80px] flex justify-center items-center w-full h-auto">
           <fieldset>
             <legend className="text-3xl font-bold text-gray-700 -ml-6 mb-6">
@@ -97,12 +101,12 @@ export default function ArticlePage() {
             </legend>
             <div className="flex-wrap gap-2 scale-[1.2] flex justify-center items-center w-full h-auto">
               <SocialCard
-                linkUrl={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
+                linkUrl={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
                 imgUrl="/2048px-Facebook-f-logo-2021-svg-removebg-preview.png"
                 name="facebook"
               />
               <SocialCard
-                linkUrl={`https://api.whatsapp.com/send?text=${encodeURIComponent(currentUrl)}`}
+                linkUrl={`https://api.whatsapp.com/send?text=${currentUrl}`}
                 imgUrl="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
                 name="whatsapp"
               />
