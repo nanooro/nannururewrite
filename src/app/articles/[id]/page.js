@@ -1,4 +1,6 @@
-"use client";
+export const dynamic = "force-dynamic";
+
+("use client");
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { ArticleCard } from "@components/articleCard";
@@ -22,7 +24,7 @@ export default function ArticlePage() {
   const id = params.id;
 
   useEffect(() => {
-    const fetchArticle = async () => {
+    async function fetchArticle() {
       const { data, error } = await supabase
         .from("Nannuru_articles_table")
         .select("*")
@@ -38,16 +40,16 @@ export default function ArticlePage() {
       } else {
         setArticle(data);
       }
-    };
+    }
 
-    const fetchAll = async () => {
+    async function fetchAll() {
       const { data, error } = await supabase
         .from("Nannuru_articles_table")
         .select("*");
 
       if (error) console.error(error);
       else setArticles(data);
-    };
+    }
 
     fetchArticle();
     fetchAll();
@@ -101,12 +103,16 @@ export default function ArticlePage() {
             </legend>
             <div className="flex-wrap gap-2 scale-[1.2] flex justify-center items-center w-full h-auto">
               <SocialCard
-                linkUrl={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
+                linkUrl={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                  currentUrl
+                )}`}
                 imgUrl="/2048px-Facebook-f-logo-2021-svg-removebg-preview.png"
                 name="facebook"
               />
               <SocialCard
-                linkUrl={`https://api.whatsapp.com/send?text=${currentUrl}`}
+                linkUrl={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                  currentUrl
+                )}`}
                 imgUrl="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
                 name="whatsapp"
               />
