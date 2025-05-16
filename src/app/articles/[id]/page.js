@@ -67,18 +67,18 @@ export default function ArticlePage() {
   return (
     <>
       {article && (
-  <Head>
-    <meta property="og:title" content={article.Heading} />
-    <meta property="og:description" content={article.subHeading} />
-    <meta property="og:image" content={article.imgUrl} />
-    <meta property="og:url" content={currentUrl} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={article.imgUrl} />
-    <meta name="twitter:title" content={article.Heading} />
-    <meta name="twitter:description" content={article.subHeading} />
-  </Head>
-)}
-pass
+        <Head>
+          <meta property="og:title" content={article.Heading} />
+          <meta property="og:description" content={article.subHeading} />
+          <meta property="og:image" content={article.imgUrl} />
+          <meta property="og:url" content={currentUrl} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content={article.imgUrl} />
+          <meta name="twitter:title" content={article.Heading} />
+          <meta name="twitter:description" content={article.subHeading} />
+        </Head>
+      )}
+
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
         <div className="flex">
