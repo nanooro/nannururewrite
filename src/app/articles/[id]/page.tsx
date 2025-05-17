@@ -17,29 +17,29 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 // Inside app/articles/[id]/page.tsx
-export async function generateMetadata({ params }) {
-  const { id } = params;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/Nannuru_articles_table?id=eq.${id}`,
-    {
-      headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      },
-    }
-  );
-  const [article] = await res.json();
+// export async function generateMetadata({ params }) {
+//   const { id } = params;
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/Nannuru_articles_table?id=eq.${id}`,
+//     {
+//       headers: {
+//         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+//       },
+//     }
+//   );
+//   const [article] = await res.json();
 
-  return {
-    title: article?.Heading,
-    description: article?.subHeading,
-    openGraph: {
-      title: article?.Heading,
-      description: article?.subHeading,
-      images: [`https://bit.ly/3zzCTUT`],
-      url: `https://nannuru.com/articles/${id}`,
-    },
-  };
-}
+//   return {
+//     title: article?.Heading,
+//     description: article?.subHeading,
+//     openGraph: {
+//       title: article?.Heading,
+//       description: article?.subHeading,
+//       images: [`https://bit.ly/3zzCTUT`],
+//       url: `https://nannuru.com/articles/${id}`,
+//     },
+//   };
+// }
 
 export default function ArticlePage() {
   const [article, setArticle] = useState(null);
