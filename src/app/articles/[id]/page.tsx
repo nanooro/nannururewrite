@@ -16,6 +16,30 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
+// Inside app/articles/[id]/page.tsx
+export async function generateMetadata({ params }) {
+  const { id } = params;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/Nannuru_articles_table?id=eq.${id}`,
+    {
+      headers: {
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      },
+    }
+  );
+  const [article] = await res.json();
+
+  return {
+    title: article?.Heading,
+    description: article?.subHeading,
+    openGraph: {
+      title: article?.Heading,
+      description: article?.subHeading,
+      images: [`https://bit.ly/3zzCTUT`],
+      url: `https://nannuru.com/articles/${id}`,
+    },
+  };
+}
 
 export default function ArticlePage() {
   const [article, setArticle] = useState(null);
@@ -70,7 +94,11 @@ export default function ArticlePage() {
         <Head>
           <meta property="og:title" content={article.Heading} />
           <meta property="og:description" content={article.subHeading} />
-          <meta property="og:image" content={article.imgUrl} />
+          <meta property="og:image" content={`https://bit.ly/3zzCTUT`} />
+          <meta
+            name="twitter:image"
+            content={`https://nannuru.com${article.imgUrl}`}
+          />{" "}
           <meta property="og:url" content={currentUrl} />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:image" content={article.imgUrl} />

@@ -10,7 +10,7 @@ const ArticlePage = ({ article, id }) => {
           <meta property="og:title" content={article.Heading} />
           <meta property="og:description" content={article.subHeading} />
           <meta property="og:url" content={articleUrl} />
-          <meta property="og:image" content={article.imgUrl} />
+          <meta property="og:image" content={"https://bit.ly/3zzCTUT"} />
           <meta property="og:type" content="article" />
           <meta property="og:site_name" content="Nannuru" />
         </Head>

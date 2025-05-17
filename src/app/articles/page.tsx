@@ -26,14 +26,14 @@ export default function ArticlesPage() {
     <div>
       <Header />
       <div className="flex flex-wrap gap-4 justify-center mt-10">
-        {articles.map((a) => (
-          <Link href={`/articles/${a.id}`} key={a.id}>
+        {articles.map((article) => (
+          <Link href={`/articles/${article.id}`} key={article.id}>
             <ArticleCard
-              imgUrl={a.imgUrl}
-              Heading={a.Heading}
-              subHeading={a.subHeading}
-              date={a.date}
-              rating={a.rating}
+              imgUrl={article.imgUrl}
+              Heading={article.Heading}
+              subHeading={article.subHeading}
+              date={article.date}
+              rating={article.rating}
             />
           </Link>
         ))}
