@@ -1,6 +1,5 @@
 "use client";
 import Head from "next/head";
-
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { ArticleCard } from "@components/articleCard";

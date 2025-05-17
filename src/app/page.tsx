@@ -1,4 +1,3 @@
-console.clear();
 
 import Image from "next/image";
 import Header from "@components/header";
