@@ -84,7 +84,7 @@ export default function ArticlePage() {
         <div className="flex">
           <h1 className="text-2xl font-bold">{article.Heading}</h1>
           <Share
-            className="ml-auto inline w-tuo h-auto flex"
+            className="ml-auto   w-tuo h-auto flex"
             id={id}
             imageUrl={article.imgUrl}
           />

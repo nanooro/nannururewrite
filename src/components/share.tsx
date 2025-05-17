@@ -16,8 +16,8 @@ export default function Share({ id, className }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className={className}>
-          <Share2 className="w-4 h-4 mr-2" />
+        <Button variant="outline" className={className + " max-h-12"}>
+          <Share2 className="w-4 max-h-4 mr-2" />
           Share
         </Button>
       </PopoverTrigger>
