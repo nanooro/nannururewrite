@@ -6,6 +6,7 @@ import {
 import { Button } from "@components/ui/button";
 import { Share2, Twitter, Mail, Link } from "lucide-react";
 import { Command, CommandItem } from "@components/ui/command"; // Assuming you're using a Command UI component
+import Head from "next/head";
 
 export default function Share({ id, className }) {
   const shareUrl = `https://nannuru.com/articles/${id}`;
@@ -16,13 +17,13 @@ export default function Share({ id, className }) {
   return (
     <>
       <Head>
-      <meta property="og:title" content={article.Heading} />
-      <meta property="og:description" content={article.subHeading} />
-      <meta property="og:url" content={articleUrl} />
-      <meta property="og:image" content={article.imgUrl} />
-      <meta property="og:type" content="article" />
-      <meta property="og:site_name" content="Nannuru" />
-        </Head>
+        <meta property="og:title" content={article.Heading} />
+        <meta property="og:description" content={article.subHeading} />
+        <meta property="og:url" content={articleUrl} />
+        <meta property="og:image" content={article.imgUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Nannuru" />
+      </Head>
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="outline" className={className + " max-h-12"}>
