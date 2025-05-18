@@ -16,66 +16,35 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
-// Inside app/articles/[id]/page.tsx
-// export async function generateMetadata({ params }) {
-//   const { id } = params;
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/Nannuru_articles_table?id=eq.${id}`,
-//     {
-//       headers: {
-//         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-//       },
-//     }
-//   );
-//   const [article] = await res.json();
-
-//   return {
-//     title: article?.Heading,
-//     description: article?.subHeading,
-//     openGraph: {
-//       title: article?.Heading,
-//       description: article?.subHeading,
-//       images: [`https://bit.ly/3zzCTUT`],
-//       url: `https://nannuru.com/articles/${id}`,
-//     },
-//   };
-// }
 
 export default function ArticlePage() {
   const [article, setArticle] = useState(null);
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState(null);
   const params = useParams();
   const id = params?.id?.toString();
-  useEffect(() => {
-    async function fetchArticle() {
-      const { data, error } = await supabase
-        .from("Nannuru_articles_table")
-        .select("*")
-        .eq("id", id)
-        .single();
 
-      if (error || !data) {
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchData = async () => {
+      const [articleRes, articlesRes] = await Promise.all([
+        supabase.from("Nannuru_articles_table").select("*").eq("id", id).single(),
+        supabase.from("Nannuru_articles_table").select("*"),
+      ]);
+
+      if (articleRes.error || !articleRes.data) {
         console.error("Article not found");
-        setArticle(false);
+        setArticles(false);
         setTimeout(() => {
           window.location.href = "/";
         }, 5000);
       } else {
-        setArticle(data);
+        setArticle(articleRes.data);
+        setArticles(articlesRes.data || []);
       }
-    }
+    };
 
-    async function fetchAll() {
-      const { data, error } = await supabase
-        .from("Nannuru_articles_table")
-        .select("*");
-
-      if (error) console.error(error);
-      else setArticles(data);
-    }
-
-    fetchArticle();
-    fetchAll();
+    fetchData();
   }, [id]);
 
   if (article === null) return <div>Loading...</div>;
@@ -94,14 +63,10 @@ export default function ArticlePage() {
         <Head>
           <meta property="og:title" content={article.Heading} />
           <meta property="og:description" content={article.subHeading} />
-          <meta property="og:image" content={`https://bit.ly/3zzCTUT`} />
-          <meta
-            name="twitter:image"
-            content={`https://nannuru.com${article.imgUrl}`}
-          />{" "}
+          <meta property="og:image" content="https://bit.ly/3zzCTUT" />
+          <meta name="twitter:image" content={`https://nannuru.com${article.imgUrl}`} />
           <meta property="og:url" content={currentUrl} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content={article.imgUrl} />
           <meta name="twitter:title" content={article.Heading} />
           <meta name="twitter:description" content={article.subHeading} />
         </Head>
@@ -109,22 +74,25 @@ export default function ArticlePage() {
 
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
-        <div className="flex">
-          <h1 className="text-2xl font-bold">{article.Heading}</h1>
-          <Share
-            className="ml-auto   w-tuo h-auto flex"
-            id={id}
-            imageUrl={article.imgUrl}
-          />
-        </div>
-        <p className="text-sm text-gray-500">{article.date}</p>
-        <img src={article.imgUrl} alt="" className="my-4 w-full rounded" />
-        <p>{article.subHeading}</p>
-        <p>{article.content}</p>
+        {article && (
+          <>
+            <div className="flex">
+              <h1 className="text-2xl font-bold">{article.Heading}</h1>
+              <Share className="ml-auto w-tuo h-auto flex" id={id} imageUrl={article.imgUrl} />
+            </div>
+            <p className="text-sm text-gray-500">{article.date}</p>
+            <img src={article.imgUrl} alt="" className="my-4 w-full rounded" />
+            <p>{article.subHeading}</p>
+            <p>{article.content}</p>
+          </>
+        )}
+
         <div className="flex justify-center items-center">
           <p className="mt-12">End</p>
         </div>
-        <hr className="my-4 border-t border-gray-300 " />
+
+        <hr className="my-4 border-t border-gray-300" />
+
         <div className="flex-wrap gap-2 mt-[80px] mb-[80px] flex justify-center items-center w-full h-auto">
           <fieldset>
             <legend className="text-3xl font-bold text-gray-700 -ml-6 mb-6">
@@ -132,22 +100,19 @@ export default function ArticlePage() {
             </legend>
             <div className="flex-wrap gap-2 scale-[1.2] flex justify-center items-center w-full h-auto">
               <SocialCard
-                linkUrl={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                  currentUrl
-                )}`}
+                linkUrl={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
                 imgUrl="/2048px-Facebook-f-logo-2021-svg-removebg-preview.png"
                 name="facebook"
               />
               <SocialCard
-                linkUrl={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                  currentUrl
-                )}`}
+                linkUrl={`https://api.whatsapp.com/send?text=${encodeURIComponent(currentUrl)}`}
                 imgUrl="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
                 name="whatsapp"
               />
             </div>
           </fieldset>
         </div>
+
         <div className="flex flex-wrap gap-4 justify-center mt-[100px]">
           {articles.map((a) => (
             <Link href={`/articles/${a.id}`} key={a.id}>
