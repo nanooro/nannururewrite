@@ -24,31 +24,37 @@ export default function ArticlePage() {
   const id = params?.id?.toString();
 
   useEffect(() => {
-    if (!id) return;
+    async function fetchArticle() {
+      const { data, error } = await supabase
+        .from("Nannuru_articles_table")
+        .select("*")
+        .eq("id", id)
+        .single();
 
-    const fetchData = async () => {
-      const [articleRes, articlesRes] = await Promise.all([
-        supabase.from("Nannuru_articles_table").select("*").eq("id", id).single(),
-        supabase.from("Nannuru_articles_table").select("*"),
-      ]);
-
-      if (articleRes.error || !articleRes.data) {
+      if (error || !data) {
         console.error("Article not found");
         setArticles(false);
         setTimeout(() => {
           window.location.href = "/";
         }, 5000);
       } else {
-        setArticle(articleRes.data);
-        setArticles(articlesRes.data || []);
+        setArticle(data);
       }
-    };
+    }
 
-    fetchData();
+    async function fetchAll() {
+      const { data, error } = await supabase
+        .from("Nannuru_articles_table")
+        .select("*");
+      if (!error) setArticles(data);
+    }
+
+    fetchArticle();
+    fetchAll();
   }, [id]);
 
-  if (article === null) return <div>Loading...</div>;
-  if (article === false)
+  if (articles === null || article === null) return <div>Loading...</div>;
+  if (articles === false)
     return (
       <div className="text-center p-4 text-red-500">
         Article not found. Redirecting to home page in 5s...
@@ -59,39 +65,33 @@ export default function ArticlePage() {
 
   return (
     <>
-      {article && (
-        <Head>
-          <meta property="og:title" content={article.Heading} />
-          <meta property="og:description" content={article.subHeading} />
-          <meta property="og:image" content="https://bit.ly/3zzCTUT" />
-          <meta name="twitter:image" content={`https://nannuru.com${article.imgUrl}`} />
-          <meta property="og:url" content={currentUrl} />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={article.Heading} />
-          <meta name="twitter:description" content={article.subHeading} />
-        </Head>
-      )}
+      <Head>
+        <meta property="og:title" content={article.Heading} />
+        <meta property="og:description" content={article.subHeading} />
+        <meta property="og:image" content="https://bit.ly/3zzCTUT" />
+        <meta name="twitter:image" content={`https://nannuru.com${article.imgUrl}`} />
+        <meta property="og:url" content={currentUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={article.Heading} />
+        <meta name="twitter:description" content={article.subHeading} />
+      </Head>
 
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
-        {article && (
-          <>
-            <div className="flex">
-              <h1 className="text-2xl font-bold">{article.Heading}</h1>
-              <Share className="ml-auto w-tuo h-auto flex" id={id} imageUrl={article.imgUrl} />
-            </div>
-            <p className="text-sm text-gray-500">{article.date}</p>
-            <img src={article.imgUrl} alt="" className="my-4 w-full rounded" />
-            <p>{article.subHeading}</p>
-            <p>{article.content}</p>
-          </>
-        )}
+        <div className="flex">
+          <h1 className="text-2xl font-bold">{article.Heading}</h1>
+          <Share className="ml-auto w-tuo h-auto flex" id={id} imageUrl={article.imgUrl} />
+        </div>
+        <p className="text-sm text-gray-500">{article.date}</p>
+        <img src={article.imgUrl} alt="" className="my-4 w-full rounded" />
+        <p>{article.subHeading}</p>
+        <p>{article.content}</p>
 
         <div className="flex justify-center items-center">
           <p className="mt-12">End</p>
         </div>
 
-        <hr className="my-4 border-t border-gray-300" />
+        <hr className="my-4 border-t border-gray-300 " />
 
         <div className="flex-wrap gap-2 mt-[80px] mb-[80px] flex justify-center items-center w-full h-auto">
           <fieldset>
