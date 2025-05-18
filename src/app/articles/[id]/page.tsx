@@ -18,8 +18,8 @@ const supabase = createClient(
 );
 
 export default function ArticlePage() {
-  const [article, setArticle] = useState(null);
-  const [articles, setArticles] = useState(null);
+  const [currentArticle, setCurrentArticle] = useState(null);
+  const [allArticles, setAllArticles] = useState(null);
   const params = useParams();
   const id = params?.id?.toString();
 
@@ -33,12 +33,12 @@ export default function ArticlePage() {
 
       if (error || !data) {
         console.error("Article not found");
-        setArticles(false);
+        setAllArticles(false);
         setTimeout(() => {
           window.location.href = "/";
         }, 5000);
       } else {
-        setArticle(data);
+        setCurrentArticle(data);
       }
     }
 
@@ -46,15 +46,15 @@ export default function ArticlePage() {
       const { data, error } = await supabase
         .from("Nannuru_articles_table")
         .select("*");
-      if (!error) setArticles(data);
+      if (!error) setAllArticles(data);
     }
 
     fetchArticle();
     fetchAll();
   }, [id]);
 
-  if (articles === null || article === null) return <div>Loading...</div>;
-  if (articles === false)
+  if (allArticles === null || currentArticle === null) return <div>Loading...</div>;
+  if (allArticles === false)
     return (
       <div className="text-center p-4 text-red-500">
         Article not found. Redirecting to home page in 5s...
@@ -66,26 +66,26 @@ export default function ArticlePage() {
   return (
     <>
       <Head>
-        <meta property="og:title" content={article.Heading} />
-        <meta property="og:description" content={article.subHeading} />
+        <meta property="og:title" content={currentArticle.Heading} />
+        <meta property="og:description" content={currentArticle.subHeading} />
         <meta property="og:image" content="https://bit.ly/3zzCTUT" />
-        <meta name="twitter:image" content={`https://nannuru.com${article.imgUrl}`} />
+        <meta name="twitter:image" content={`https://nannuru.com${currentArticle.imgUrl}`} />
         <meta property="og:url" content={currentUrl} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={article.Heading} />
-        <meta name="twitter:description" content={article.subHeading} />
+        <meta name="twitter:title" content={currentArticle.Heading} />
+        <meta name="twitter:description" content={currentArticle.subHeading} />
       </Head>
 
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
         <div className="flex">
-          <h1 className="text-2xl font-bold">{article.Heading}</h1>
-          <Share className="ml-auto w-tuo h-auto flex" id={id} imageUrl={article.imgUrl} />
+          <h1 className="text-2xl font-bold">{currentArticle.Heading}</h1>
+          <Share className="ml-auto w-tuo h-auto flex" id={id} imageUrl={currentArticle.imgUrl} />
         </div>
-        <p className="text-sm text-gray-500">{article.date}</p>
-        <img src={article.imgUrl} alt="" className="my-4 w-full rounded" />
-        <p>{article.subHeading}</p>
-        <p>{article.content}</p>
+        <p className="text-sm text-gray-500">{currentArticle.date}</p>
+        <img src={currentArticle.imgUrl} alt="" className="my-4 w-full rounded" />
+        <p>{currentArticle.subHeading}</p>
+        <p>{currentArticle.content}</p>
 
         <div className="flex justify-center items-center">
           <p className="mt-12">End</p>
@@ -114,7 +114,7 @@ export default function ArticlePage() {
         </div>
 
         <div className="flex flex-wrap gap-4 justify-center mt-[100px]">
-          {articles.map((a) => (
+          {allArticles.map((a) => (
             <Link href={`/articles/${a.id}`} key={a.id}>
               <ArticleCard
                 imgUrl={a.imgUrl}
