@@ -55,6 +55,7 @@
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.3.0",
     "vaul": "^1.1.2",
+    "vim": "^0.1.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {
