@@ -1,4 +1,4 @@
-import { supabase } from "src/app/lib/supabaseClient";
+import { supabase } from "@/lib/supabaseClient";
 import Head from "next/head";
 export default async function ArticlePage({
   params,
