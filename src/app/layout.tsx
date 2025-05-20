@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "nannuru",
-  description: "News and entertainment",
+  description: "News and Entertainment",
 };
 
 export default function RootLayout({
