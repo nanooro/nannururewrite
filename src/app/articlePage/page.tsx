@@ -28,12 +28,6 @@ export default async function ArticlePage({
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Nannuru" />
       </Head>
-
-      {/* Article content
-      <h1>{article.Heading}</h1>
-      <img src={article.imgUrl} alt={article.Heading} />
-      <p>{article.subHeading}</p>
-      <p>{article.content}</p> */}
     </>
   );
 }
