@@ -24,6 +24,8 @@ export default function ArticlePage() {
   const id = params?.id?.toString();
 
   useEffect(() => {
+    if (!id) return; // ✅ Prevents early fetch before id is ready
+
     async function fetchArticle() {
       const { data, error } = await supabase
         .from("Nannuru_articles_table")
@@ -53,7 +55,9 @@ export default function ArticlePage() {
     fetchAll();
   }, [id]);
 
+  // ✅ Prevent rendering if data is not ready
   if (allArticles === null || currentArticle === null) return <div>Loading...</div>;
+
   if (allArticles === false)
     return (
       <div className="text-center p-4 text-red-500">
@@ -61,6 +65,7 @@ export default function ArticlePage() {
       </div>
     );
 
+  // ✅ Avoid window undefined during SSR (though you're using "use client", it's still good practice)
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
@@ -76,6 +81,7 @@ export default function ArticlePage() {
         <meta name="twitter:description" content={currentArticle.subHeading} />
       </Head>
 
+      {/* the rest is unchanged UI... */}
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
         <div className="flex">
