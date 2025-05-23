@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
-<<<<<<< HEAD
     "@radix-ui/react-accordion": "^1.2.10",
     "@radix-ui/react-alert-dialog": "^1.1.13",
     "@radix-ui/react-aspect-ratio": "^1.1.6",
@@ -51,7 +50,6 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.3",
-=======
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-aspect-ratio": "^1.1.7",
@@ -92,19 +90,15 @@
     "react-day-picker": "^8.10.1",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.4",
->>>>>>> 40e41e4 (init)
     "react-resizable-panels": "^3.0.2",
     "recharts": "^2.15.3",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.3.0",
-<<<<<<< HEAD
     "vaul": "^1.1.2",
-    "zod": "^3.24.4"
-=======
+    "zod": "^3.24.4",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
     "zod": "^3.25.23"
->>>>>>> 40e41e4 (init)
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
