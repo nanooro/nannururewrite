@@ -5,7 +5,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
   NavigationMenuLink,
-} from "@/components/ui/navigation-menu";
+} from "@ui/navigation-menu";
 
 export default function DropdownMenu({ className }) {
   return (
