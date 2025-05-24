@@ -33,14 +33,13 @@ export default function ArticleRead() {
   return (
     <>
       <Head>
+        <title>{currentArticle.Heading}</title>
         <meta property="og:title" content={currentArticle.Heading} />
         <meta property="og:description" content={currentArticle.subHeading} />
         <meta property="og:image" content={currentArticle.imgUrl} />
         <meta property="og:url" content={currentUrl} />
       </Head>
-
       <Header />
-
       <div className="p-4 max-w-3xl mx-auto">
         <div className="flex">
           <h1 className="text-2xl font-bold">{currentArticle.Heading}</h1>
@@ -105,7 +104,6 @@ export default function ArticleRead() {
           ))}
         </div>
       </div>
-
       <Footer />
     </>
   );
