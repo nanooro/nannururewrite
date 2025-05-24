@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
-
+import Header from "@ui/header";
 import Link from "next/link";
 
 export default function ArticlesPage() {
