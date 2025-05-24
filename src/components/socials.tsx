@@ -1,4 +1,4 @@
-import SocialCard from "@components/socialCard";
+import SocialCard from "@ui/socialCard";
 export default function Socials({ linkUrl, imgUrl, name }) {
   return (
     <div className=" w-auto h-auto " id="fbCard">

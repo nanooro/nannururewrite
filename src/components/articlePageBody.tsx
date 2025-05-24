@@ -1,5 +1,5 @@
-import { Footer } from "@components/footer";
-import Header from "@components/header";
+import { Footer } from "@ui/footer";
+import Header from "@ui/header";
 import Image from "next/image";
 type Props = {
   imgUrl: string;

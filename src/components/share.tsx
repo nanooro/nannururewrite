@@ -2,10 +2,10 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@components/ui/popover";
-import { Button } from "@components/ui/button";
+} from "@ui/ui/popover";
+import { Button } from "@ui/ui/button";
 import { Share2, Twitter, Mail, Link } from "lucide-react";
-import { Command, CommandItem } from "@components/ui/command"; // Assuming you're using a Command UI component
+import { Command, CommandItem } from "@ui/ui/command"; // Assuming you're using a Command UI component
 import Head from "next/head";
 
 export default function Share({ id, className }) {

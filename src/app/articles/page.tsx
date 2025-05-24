@@ -2,9 +2,9 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
-import { ArticleCard } from "@components/articleCard";
-import Header from "@components/header";
-import { Footer } from "@components/footer";
+import { ArticleCard } from "@ui/articleCard";
+import Header from "@ui/header";
+import { Footer } from "@ui/footer";
 import Link from "next/link";
 
 export default function ArticlesPage() {

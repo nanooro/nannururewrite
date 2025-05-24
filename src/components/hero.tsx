@@ -1,4 +1,4 @@
-import Header from "@components/header";
+import Header from "@ui/header";
 import Link from "next/link";
 
 export default function Hero() {

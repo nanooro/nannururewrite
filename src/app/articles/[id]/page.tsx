@@ -3,14 +3,14 @@ export const dynamic = "force-dynamic";
 
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { ArticleCard } from "@components/articleCard";
-import { Footer } from "@components/footer";
+import { ArticleCard } from "@ui/articleCard";
+import { Footer } from "@ui/footer";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import Header from "@components/header";
-import SocialCard from "@components/socialCard";
+import Header from "@ui/header";
+import SocialCard from "@ui/socialCard";
 import Head from "next/head";
-import Share from "@components/share";
+import Share from "@ui/share";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
