@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import ArticleCard from "@ui/articleCard";
-import { Header } from "@ui/header";
-import { Footer } from "@ui/footer";
+// import { Header } from "@ui/header";
+// import { Footer } from "@ui/footer";
 
 import Link from "next/link";
 
@@ -43,3 +43,7 @@ export default function ArticlesPage() {
     </div>
   );
 }
+function Footer() {
+  return <div className="mt-24"></div>;
+}
+// export { Footer };

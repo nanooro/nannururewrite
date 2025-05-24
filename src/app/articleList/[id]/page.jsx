@@ -6,8 +6,8 @@ import { supabase } from "../../../lib/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-import { Header } from "@ui/header";
-import { Footer } from "@ui/footer";
+// import { Header } from "@ui/header";
+// import { Footer } from "@ui/footer";
 import Share from "@ui/share";
 import SocialCard from "@ui/socialCard";
 import ArticleCard from "@ui/articleCard";
@@ -120,3 +120,20 @@ export default function ArticleRead() {
     </>
   );
 }
+import DropdownMenu from "@ui/dropDownMenu";
+import { motion } from "framer-motion";
+import Hero from "@ui/hero";
+import Link from "next/link";
+function Header() {
+  return (
+    <>
+      <div className="flex justify-start items-center m-1   w-auto h-[8vh] bg-white">
+        <Link href="/">
+          <h1 className="min-text-3xl text-5xl font-bold ">Nannuru</h1>
+        </Link>
+        <DropdownMenu className="ml-auto bg-gray-000" />
+      </div>
+    </>
+  );
+}
+// export { Header };
