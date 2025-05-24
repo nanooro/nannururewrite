@@ -36,24 +36,10 @@ export default function ArticleRead() {
   return (
     <>
       <Head>
-        <meta property="og:title" content={currentArticle.Heading} />
-        <meta property="og:description" content={currentArticle.subHeading} />
-        <meta
-          property="og:image"
-          content={`https://nannuru.com${currentArticle.imgUrl}`}
-        />
-        <meta
-          property="og:url"
-          content={`https://nannuru.com/articleList/${id}`}
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={currentArticle.Heading} />
-        <meta name="twitter:description" content={currentArticle.subHeading} />
-        <meta
-          name="twitter:image"
-          content={`https://nannuru.com${currentArticle.imgUrl}`}
-        />
-      </Head>
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.summary} />
+        <meta property="og:image" content={article.imageUrl} />
+      </Head>{" "}
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
         <div className="flex">
