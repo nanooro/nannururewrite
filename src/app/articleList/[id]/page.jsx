@@ -36,9 +36,10 @@ export default function ArticleRead() {
   return (
     <>
       <Head>
-        <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.summary} />
-        <meta property="og:image" content={article.imageUrl} />
+        <meta property="og:title" content={currentArticle.Heading} />
+        <meta property="og:description" content={currentArticle.subHeading} />
+        <meta property="og:image" content={currentArticle.imgUrl} />
+        <meta property="og:url" content={currentUrl} />
       </Head>{" "}
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
