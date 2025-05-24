@@ -8,7 +8,7 @@ import Link from "next/link";
 import Head from "next/head";
 import Share from "@ui/share";
 import SocialCard from "@ui/socialCard";
-import {ArticleCard} from "@ui/articleCard";
+import { ArticleCard } from "@ui/articleCard";
 
 export default function ArticleRead() {
   const [articles, setArticles] = useState([]);
@@ -38,17 +38,22 @@ export default function ArticleRead() {
       <Head>
         <meta property="og:title" content={currentArticle.Heading} />
         <meta property="og:description" content={currentArticle.subHeading} />
-        <meta property="og:image" content="https://bit.ly/3zzCTUT" />
+        <meta
+          property="og:image"
+          content={`https://nannuru.com${currentArticle.imgUrl}`}
+        />
+        <meta
+          property="og:url"
+          content={`https://nannuru.com/articleList/${id}`}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={currentArticle.Heading} />
+        <meta name="twitter:description" content={currentArticle.subHeading} />
         <meta
           name="twitter:image"
           content={`https://nannuru.com${currentArticle.imgUrl}`}
         />
-        <meta property="og:url" content={currentUrl} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={currentArticle.Heading} />
-        <meta name="twitter:description" content={currentArticle.subHeading} />
       </Head>
-
       <Header />
       <div className="p-4 max-w-3xl mx-auto">
         <div className="flex">
