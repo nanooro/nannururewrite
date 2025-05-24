@@ -1,4 +1,5 @@
 "use client";
+import Head from "next/head";
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -10,7 +11,7 @@ import Share from "@ui/share";
 import SocialCard from "@ui/socialCard";
 import { ArticleCard } from "@ui/articleCard";
 
-export default function ArticleRead() {
+export default function ArticleRead({ article }) {
   const [articles, setArticles] = useState([]);
   const params = useParams();
   const id = params?.id;
@@ -33,15 +34,16 @@ export default function ArticleRead() {
 
   if (!currentArticle) return <div>Loading...</div>;
 
-  return (
-    <>
-      <Head>
-        <meta property="og:title" content={currentArticle.Heading} />
-        <meta property="og:description" content={currentArticle.subHeading} />
-        <meta property="og:image" content={currentArticle.imgUrl} />
-        <meta property="og:url" content={currentUrl} />
-      </Head>{" "}
-      <Header />
+
+    const currentUrl = `https://www.nannuru.com/articleList/${article.id}`;
+  
+    return (
+        <Head>
+          <meta property="og:title" content={article.Heading} />
+          <meta property="og:description" content={article.subHeading} />
+          <meta property="og:image" content={article.imgUrl} />
+          <meta property="og:url" content={currentUrl} />
+        </Head>      <Header />
       <div className="p-4 max-w-3xl mx-auto">
         <div className="flex">
           <h1 className="text-2xl font-bold">{currentArticle.Heading}</h1>
