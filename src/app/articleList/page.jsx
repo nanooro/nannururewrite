@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
-import ArticleCard from "@ui/articleCard";
 
 import Link from "next/link";
 
