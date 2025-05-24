@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-<<<<<<< HEAD
 @custom-variant dark (&:is(.dark *));
 
 /* :root {
@@ -392,4 +391,4 @@ body {
     @apply bg-background text-foreground;
   }
 }
->>>>>>> 40e41e4 (init)
+
