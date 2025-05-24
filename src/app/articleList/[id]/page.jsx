@@ -6,8 +6,6 @@ import { supabase } from "../../../lib/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-// import { Header } from "@ui/header";
-// import { Footer } from "@ui/footer";
 import Share from "@ui/share";
 import SocialCard from "@ui/socialCard";
 import ArticleCard from "@ui/articleCard";
