@@ -12,15 +12,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-<<<<<<< HEAD:src/app/layout.tsx
 export const metadata: Metadata = {
-  title: "nannuru",
-  description: "News and Entertainment",
-=======
-export const metadata = {
   title: "Nannuru",
   description: "News and entertainment",
->>>>>>> 40e41e4 (init):src/app/layout.js
 };
 
 export default function RootLayout({
