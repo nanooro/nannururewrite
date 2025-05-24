@@ -2,7 +2,7 @@ import DropdownMenu from "@ui/dropDownMenu";
 import { motion } from "framer-motion";
 import Hero from "@ui/hero";
 import Link from "next/link";
-function Header() {
+export default function Header() {
   return (
     <>
       <div className="flex justify-start items-center m-1   w-auto h-[8vh] bg-white">
@@ -14,4 +14,4 @@ function Header() {
     </>
   );
 }
-export { Header };
+// export { Header };
