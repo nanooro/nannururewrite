@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-function ArticleCard({ imgUrl, Heading, subHeading, date, rating }) {
+export default function ArticleCard({
+  imgUrl,
+  Heading,
+  subHeading,
+  date,
+  rating,
+}) {
   return (
     <div
       className="gap-5 justify-center items-center w-[100%] h-auto flex flex-wrap"
@@ -23,7 +29,7 @@ function ArticleCard({ imgUrl, Heading, subHeading, date, rating }) {
           <div className="pb-5 mb-5 border-b border-gray-200">
             <h3 className="mb-1 text-lg font-bold">{Heading}</h3>
             <span className="text-sm">{subHeading}</span>
-          </div>
+      </div>
           <div className="flex items-center justify-between w-full ml-auto">
             <div className="text-sm text-slate-400">{date}</div>
             <div className="flex items-center gap-x-1">
@@ -43,4 +49,3 @@ function ArticleCard({ imgUrl, Heading, subHeading, date, rating }) {
     </div>
   );
 }
-export { ArticleCard };
