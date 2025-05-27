@@ -1,124 +1,34 @@
-"use client";
-import Head from "next/head";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import ArticleRead from "./articleRead";
 import { supabase } from "../../../lib/supabaseClient";
-import Image from "next/image";
-import Link from "next/link";
-import Share from "@ui/share";
-import SocialCard from "@ui/socialCard";
-import { ArticleCard } from "@ui/articleCard";
 
-export default function ArticleRead() {
-  const [articles, setArticles] = useState([]);
-  const params = useParams();
-  const id = params?.id;
+export async function generateMetadata({ params }) {
+  const { id } = params;
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      const { data, error } = await supabase
-        .from("Nannuru_articles_table")
-        .select("*");
-      if (error) console.error(error);
-      else setArticles(data);
-    };
-    fetchArticles();
-  }, []);
-
-  const currentArticle = articles.find((a) => a.id === Number(id));
-  const currentUrl = `https://www.nannuru.com/articleList/${id}`;
-
-  if (!currentArticle) return <div>Loading...</div>;
-
-  return (
-    <>
-      <Head>
-        <title>{currentArticle.Heading}</title>
-        <meta property="og:title" content={currentArticle.Heading} />
-        <meta property="og:description" content={currentArticle.subHeading} />
-        <meta property="og:image" content={currentArticle.imgUrl} />
-        <meta property="og:url" content={currentUrl} />
-      </Head>
-      <Header />
-      <div className="p-4 max-w-3xl mx-auto">
-        <div className="flex">
-          <h1 className="text-2xl font-bold">{currentArticle.Heading}</h1>
-          <Share
-            className="ml-auto flex"
-            id={id}
-            imageUrl={currentArticle.imgUrl}
-          />
-        </div>
-        <p className="text-sm text-gray-500">{currentArticle.date}</p>
-        <Image
-          src={currentArticle.imgUrl}
-          alt=""
-          width={800}
-          height={400}
-          className="my-4 w-full rounded"
-        />
-        <p>{currentArticle.subHeading}</p>
-        <p>{currentArticle.content}</p>
-
-        <div className="flex justify-center items-center mt-12">
-          <p>End</p>
-        </div>
-
-        <hr className="my-4 border-t border-gray-300" />
-
-        <div className="flex-wrap gap-2 mt-20 mb-20 flex justify-center items-center">
-          <fieldset>
-            <legend className="text-3xl font-bold text-gray-700 -ml-6 mb-6">
-              Share this article <span>❤️</span>
-            </legend>
-            <div className="flex-wrap gap-2 scale-110 flex justify-center items-center">
-              <SocialCard
-                linkUrl={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                  currentUrl
-                )}`}
-                imgUrl="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                name="facebook"
-              />
-              <SocialCard
-                linkUrl={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                  currentUrl
-                )}`}
-                imgUrl="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-                name="whatsapp"
-              />
-            </div>
-          </fieldset>
-        </div>
-
-        <div className="flex flex-wrap gap-4 justify-center mt-24">
-          {articles.map((a) => (
-            <Link href={`/articles/${a.id}`} key={a.id}>
-              <ArticleCard
-                imgUrl={a.imgUrl}
-                Heading={a.Heading}
-                subHeading={a.subHeading}
-                date={a.date}
-                rating={a.rating}
-              />
-            </Link>
-          ))}
-        </div>
-      </div>
-      <Footer />
-    </>
+  const res = await fetch(
+    `https://your-project.supabase.co/rest/v1/Nannuru_articles_table?id=eq.${id}`,
+    {
+      headers: {
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+      },
+    }
   );
+
+  const [data] = await res.json();
+
+  return {
+    title: data?.Heading,
+    description: data?.subHeading,
+    openGraph: {
+      title: data?.Heading,
+      description: data?.subHeading,
+      images: [data?.imgUrl],
+      url: `https://www.nannuru.com/articleList/${id}`,
+      type: "article",
+    },
+  };
 }
 
-function Header() {
-  return (
-    <div className="flex justify-start items-center m-1 w-auto h-[8vh] bg-white">
-      <Link href="/">
-        <h1 className="min-text-3xl text-5xl font-bold ">Nannuru</h1>
-      </Link>
-    </div>
-  );
-}
-
-function Footer() {
-  return <div className="mt-24"></div>;
+export default function Page() {
+  return <ArticleRead />;
 }
